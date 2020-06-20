@@ -1,0 +1,50 @@
+html, 
+body {
+  background: #72bdbd;
+  margin: auto;
+  padding-top: 0px;
+  font-family: 'Share', cursive;
+}
+
+canvas {
+  display: inline-block;
+    border-radius: 12px;
+  border: 16px solid rgb(44,74,99);
+}
+
+h1{
+  padding-top: 16px;
+}
+
+#container{
+  text-align: center;
+  display: block;
+}
+
+
+ #canvas-holder{
+  padding-top: 8px;
+   margin-left: auto;
+     margin-right: auto;
+}
+
+
+#iframe-holder{
+  padding-top:24px;
+   margin-left: auto;
+     margin-right: auto;
+}
+
+.img1 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width:15%;
+  height:auto;
+}
+
+p{
+  color: rgb(44, 74, 99);
+  font-size: 24px;
+  padding: 0px;
+}
