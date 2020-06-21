@@ -58,7 +58,7 @@ function draw() {
       noFill();
       strokeWeight(3);
       if (detection.label === 'person') {
-        stroke(114, 189, 189);
+        stroke(44, 74, 99);
       } else {
         stroke(253, 188, 74);
       }
