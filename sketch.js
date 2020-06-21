@@ -27,7 +27,7 @@ function setup() {
 }
 
 function modelReady() {
-  console.log('model loaded')
+  select('#modelStatus').html(' ')
   detect();
 }
 
