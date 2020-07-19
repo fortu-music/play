@@ -1,5 +1,5 @@
 var accessToken;
-// var data;
+var data;
 // var genre;
 
 let video;
@@ -7,11 +7,94 @@ let detector;
 let detections;
 let lastDetected = "";
 
+const mappedValues = {
+	'person' 			: 'human', 
+	'traffic light'		: 'traffic%20light',
+	'fire hydrant'		: 'fire%20hydrant',
+	'stop sign'			: 'stop%20sign',
+	'parking meter'		: 'parking%20meter',
+	'sports ball'		: 'sports%20ball',
+	'baseball bat'		: 'baseball%20bat',
+	'baseball glove'	: 'baseball%20glove',
+	'tennis racket'		: 'tennis%20racket',
+	'wine glass'		: 'wine%20glass',
+	'potted plant'		: 'potted%20plant',
+	'dining table'		: 'dining%20table',
+	'tv'				: 'television',
+	'hot dog'			: 'hot%20dog',	
+	'cell phone'		: 'cell%20phone',
+	'teddy bear'		: 'teddy%20bear',
+	'hair drier'		: 'hair%20dryer',
+
+	'bicycle' 			: 'bicycle',
+	'car'				: 'car',
+	'motorcycle'		: 'motorcycle',
+	'airplane'			: 'airplane',
+	'bus'				: 'bus',
+	'train'				: 'train',
+	'truck'				: 'truck',
+	'boat'				: 'boat',
+	'bench'				: 'bench',
+	'bird'				: 'bird',
+	'cat'				: 'cat',
+	'dog'				: 'dog',
+	'horse'				: 'horse',
+	'sheep'				: 'sheep',
+	'cow'				: 'cow',
+	'elephant'			: 'elephant',
+	'bear'				: 'bear',
+	'zebra'				: 'zebra',
+	'giraffe'			: 'giraffe',
+	'backpack'			: 'backpack',
+	'umbrella'			: 'umbrella',
+	'handbag'			: 'handbag',
+	'tie'				: 'tie',
+	'suitcase'			: 'suitcase',
+	'frisbee'			: 'frisbee',
+	'skis'				: 'skis',
+	'snowboard'			: 'snowboard',
+	'kite'				: 'kite',
+	'skateboard'		: 'skateboard',
+	'surfboard'			: 'surfboard',
+	'bottle'			: 'bottle',
+	'cup'				: 'cup',
+	'fork'				: 'fork',
+	'knife'				: 'knife',
+	'spoon'				: 'spoon',
+	'bowl'				: 'bowl',
+	'banana'			: 'banana',
+	'apple'				: 'apple',
+	'sandwich'			: 'sandwich',
+	'orange'			: 'orange',
+	'broccoli'			: 'broccoli',
+	'carrot'			: 'carrot',
+	'pizza'				: 'pizza',
+	'donut'				: 'donut',
+	'cake'				: 'cake',
+	'chair'				: 'chair',
+	'couch'				: 'couch',
+	'bed'				: 'bed',
+	'toilet'			: 'toilet',
+	'laptop'			: 'laptop',
+	'mouse'				: 'mouse',
+	'remote'			: 'remote',
+	'keyboard'			: 'keyboard',
+	'microwave'			: 'microwave',
+	'oven'				: 'oven',
+	'toaster'			: 'toaster',
+	'sink'				: 'sink',
+	'refrigerator'		: 'refrigerator',
+	'book'				: 'book',
+	'clock'				: 'clock',
+	'vase'				: 'vase',
+	'scissors'			: 'scissors',
+	'toothbrush'		: 'toothbrush',
+	}
 
 
 function setup() {
 
-  canvas = createCanvas(400, 300);
+  canvas = createCanvas(480, 360);
   canvas.parent('canvas-holder');
 
   video = createCapture(VIDEO);
@@ -48,6 +131,7 @@ function gotResults(err, results) {
 function draw() {
   image(video, 0, 0, width, height);
 
+    
   if (detections) {
     detections.forEach(detection => {
       noStroke();
@@ -63,33 +147,27 @@ function draw() {
         stroke(253, 188, 74);
       }
 
-      console.log(detection.label);
+      console.log('detection label: ' + detection.label);
+      console.log(detection.label.length);
+
+
       rect(detection.x, detection.y, detection.width, detection.height);
 
       var offset = int(random(0, 21));
 
 
+        console.log(mappedValues[detection.label])
+
+      
       if (detection.label != lastDetected) {
-
-        if (detection.label == 'person') {
-          var url = 'https://api.spotify.com/v1/search?q=name:human&type=track&offset=' + offset + '&limit=20';
-          console.log(url);
-          getAPIData(accessToken, url, function(searchResults) {
-            data = searchResults;
-            select("#iframe-holder").html('<iframe src="https://open.spotify.com/embed/track/' + data.tracks.items[0].id + '" width="300" height="300" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>');
-          });
-          lastDetected = detection.label;
-
-        } else {
-
-          var url = 'https://api.spotify.com/v1/search?q=name:' + detection.label + '&type=track&offset=' + offset + '&limit=20';
-          getAPIData(accessToken, url, function(searchResults) {
-            data = searchResults;
-            select("#iframe-holder").html('<iframe src="https://open.spotify.com/embed/track/' + data.tracks.items[0].id + '" width="300" height="300" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>');
-          });
-
-          lastDetected = detection.label;
-        }
+        
+        var url = 'https://api.spotify.com/v1/search?q=' + mappedValues[detection.label] + '&type=track&offset=' + offset + '&limit=20';
+        console.log(url);
+        getAPIData(accessToken, url, function(searchResults) {
+          data = searchResults;
+          select("#iframe-holder").html('<iframe src="https://open.spotify.com/embed/track/' + data.tracks.items[0].id + '" width="300" height="300" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>');
+        });
+        lastDetected = detection.label;
 
       }
     })
