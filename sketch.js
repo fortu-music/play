@@ -8,10 +8,10 @@ let detections;
 let lastDetected = "";
 
 const mappedValues = {
-	'person' 		: 'human', 
+	'person' 			: 'human', 
 	'traffic light'		: 'traffic%20light',
 	'fire hydrant'		: 'fire%20hydrant',
-	'stop sign'		: 'stop%20sign',
+	'stop sign'			: 'stop%20sign',
 	'parking meter'		: 'parking%20meter',
 	'sports ball'		: 'sports%20ball',
 	'baseball bat'		: 'baseball%20bat',
@@ -20,81 +20,81 @@ const mappedValues = {
 	'wine glass'		: 'wine%20glass',
 	'potted plant'		: 'potted%20plant',
 	'dining table'		: 'dining%20table',
-	'tv'			: 'television',
-	'hot dog'		: 'hot%20dog',	
+	'tv'				: 'television',
+	'hot dog'			: 'hot%20dog',	
 	'cell phone'		: 'cell%20phone',
 	'teddy bear'		: 'teddy%20bear',
 	'hair drier'		: 'hair%20dryer',
 
-	'bicycle' 		: 'bicycle',
-	'car'			: 'car',
+	'bicycle' 			: 'bicycle',
+	'car'				: 'car',
 	'motorcycle'		: 'motorcycle',
-	'airplane'		: 'airplane',
-	'bus'			: 'bus',
-	'train'			: 'train',
-	'truck'			: 'truck',
-	'boat'			: 'boat',
-	'bench'			: 'bench',
-	'bird'			: 'bird',
-	'cat'			: 'cat',
-	'dog'			: 'dog',
-	'horse'			: 'horse',
-	'sheep'			: 'sheep',
-	'cow'			: 'cow',
-	'elephant'		: 'elephant',
-	'bear'			: 'bear',
-	'zebra'			: 'zebra',
-	'giraffe'		: 'giraffe',
-	'backpack'		: 'backpack',
-	'umbrella'		: 'umbrella',
-	'handbag'		: 'handbag',
-	'tie'			: 'tie',
-	'suitcase'		: 'suitcase',
-	'frisbee'		: 'frisbee',
-	'skis'			: 'skis',
-	'snowboard'		: 'snowboard',
-	'kite'			: 'kite',
+	'airplane'			: 'airplane',
+	'bus'				: 'bus',
+	'train'				: 'train',
+	'truck'				: 'truck',
+	'boat'				: 'boat',
+	'bench'				: 'bench',
+	'bird'				: 'bird',
+	'cat'				: 'cat',
+	'dog'				: 'dog',
+	'horse'				: 'horse',
+	'sheep'				: 'sheep',
+	'cow'				: 'cow',
+	'elephant'			: 'elephant',
+	'bear'				: 'bear',
+	'zebra'				: 'zebra',
+	'giraffe'			: 'giraffe',
+	'backpack'			: 'backpack',
+	'umbrella'			: 'umbrella',
+	'handbag'			: 'handbag',
+	'tie'				: 'tie',
+	'suitcase'			: 'suitcase',
+	'frisbee'			: 'frisbee',
+	'skis'				: 'skis',
+	'snowboard'			: 'snowboard',
+	'kite'				: 'kite',
 	'skateboard'		: 'skateboard',
-	'surfboard'		: 'surfboard',
-	'bottle'		: 'bottle',
-	'cup'			: 'cup',
-	'fork'			: 'fork',
-	'knife'			: 'knife',
-	'spoon'			: 'spoon',
-	'bowl'			: 'bowl',
-	'banana'		: 'banana',
-	'apple'			: 'apple',
-	'sandwich'		: 'sandwich',
-	'orange'		: 'orange',
-	'broccoli'		: 'broccoli',
-	'carrot'		: 'carrot',
-	'pizza'			: 'pizza',
-	'donut'			: 'donut',
-	'cake'			: 'cake',
-	'chair'			: 'chair',
-	'couch'			: 'couch',
-	'bed'			: 'bed',
-	'toilet'		: 'toilet',
-	'laptop'		: 'laptop',
-	'mouse'			: 'mouse',
-	'remote'		: 'remote',
-	'keyboard'		: 'keyboard',
-	'microwave'		: 'microwave',
-	'oven'			: 'oven',
-	'toaster'		: 'toaster',
-	'sink'			: 'sink',
+	'surfboard'			: 'surfboard',
+	'bottle'			: 'bottle',
+	'cup'				: 'cup',
+	'fork'				: 'fork',
+	'knife'				: 'knife',
+	'spoon'				: 'spoon',
+	'bowl'				: 'bowl',
+	'banana'			: 'banana',
+	'apple'				: 'apple',
+	'sandwich'			: 'sandwich',
+	'orange'			: 'orange',
+	'broccoli'			: 'broccoli',
+	'carrot'			: 'carrot',
+	'pizza'				: 'pizza',
+	'donut'				: 'donut',
+	'cake'				: 'cake',
+	'chair'				: 'chair',
+	'couch'				: 'couch',
+	'bed'				: 'bed',
+	'toilet'			: 'toilet',
+	'laptop'			: 'laptop',
+	'mouse'				: 'mouse',
+	'remote'			: 'remote',
+	'keyboard'			: 'keyboard',
+	'microwave'			: 'microwave',
+	'oven'				: 'oven',
+	'toaster'			: 'toaster',
+	'sink'				: 'sink',
 	'refrigerator'		: 'refrigerator',
-	'book'			: 'book',
-	'clock'			: 'clock',
-	'vase'			: 'vase',
-	'scissors'		: 'scissors',
+	'book'				: 'book',
+	'clock'				: 'clock',
+	'vase'				: 'vase',
+	'scissors'			: 'scissors',
 	'toothbrush'		: 'toothbrush',
 	}
 
 
 function setup() {
 
-  canvas = createCanvas(480, 360);
+  canvas = createCanvas(520, 390);
   canvas.parent('canvas-holder');
 
   video = createCapture(VIDEO);
@@ -131,7 +131,7 @@ function gotResults(err, results) {
 function draw() {
   image(video, 0, 0, width, height);
 
-    
+
   if (detections) {
     detections.forEach(detection => {
       noStroke();
@@ -142,9 +142,9 @@ function draw() {
       noFill();
       strokeWeight(3);
       if (detection.label === 'person') {
-        stroke(44, 74, 99);
+        stroke(0, 195, 255);
       } else {
-        stroke(253, 188, 74);
+        stroke(255, 255, 28);
       }
 
       console.log('detection label: ' + detection.label);
