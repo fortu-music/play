@@ -16,6 +16,7 @@ canvas {
 }
 
 h1{
+        padding-top:24px; 
   color: rgb(44, 74, 99);
   padding-top: 12px;
 }
@@ -34,7 +35,6 @@ p{
 
 
 #container{
-    padding-top:24px; 
   text-align: center;
   display: block;
 }
